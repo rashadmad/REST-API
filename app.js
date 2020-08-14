@@ -1,5 +1,8 @@
 'use strict';
 
+//load Sequelize
+const { Sequelize } = require('sequelize');
+
 // load modules
 const express = require('express');
 const morgan = require('morgan');
