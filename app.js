@@ -61,17 +61,6 @@ const server = app.listen(app.get('port'), () => {
     // Test the connection to the database
     await sequelize.authenticate();
     console.log('Connection to the database successful!');
-    
-    const peopleInstances = await Promise.all([
-      User.create({
-        firstName: 'Brad',
-        lastName: 'Bird',
-      }),
-      User.create({
-        firstName: 'Vin',
-        lastName: 'Diesel',
-      }),
-    ])
 
   } catch(error) {
     console.log("database not running")
