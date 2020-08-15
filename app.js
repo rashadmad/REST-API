@@ -11,6 +11,8 @@ const User = require('./models').User;
 const express = require('express');
 const morgan = require('morgan');
 
+// set up routing
+
 // variable to enable global error logging
 const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'true';
 
@@ -21,6 +23,7 @@ const app = express();
 app.use(morgan('dev'));
 
 // TODO setup your api routes here
+
 
 // setup a friendly greeting for the root route
 app.get('/', (req, res) => {
