@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
         validate: {
             notEmpty: {
                 // custom error message
-                msg: 'Please provide a value for "title"',
+                msg: 'Please provide a name for the user',
             }
         },
     },
@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
         validate: {
             notEmpty: {
                 // custom error message
-                msg: 'Please provide a value for "Author"',
+                msg: 'Please provide a last name for the user',
             }
         },
     },
@@ -35,7 +35,7 @@ module.exports = (sequelize) => {
         validate: {
             notEmpty: {
                 // custom error message
-                msg: 'Please provide a value for "genre"',
+                msg: 'Please add a valid email address',
             }
         },
     },
@@ -45,7 +45,7 @@ module.exports = (sequelize) => {
         validate: {
             notEmpty: {
                 // custom error message
-                msg: 'Please provide a value for "year"',
+                msg: 'Please provide a password',
             }
         },
     },

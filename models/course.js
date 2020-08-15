@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
         validate: {
             notEmpty: {
                 // custom error message
-                msg: 'Please provide a title of the course',
+                msg: 'Please provide a title for the course',
             }
          },
     },
