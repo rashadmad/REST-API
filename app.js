@@ -1,7 +1,7 @@
 'use strict';
 
 //load Sequelize
-const { Sequelize } = require('sequelize');
+const { sequelize } = require('./models');
 
 // load modules
 const express = require('express');
@@ -51,4 +51,14 @@ app.set('port', process.env.PORT || 5000);
 const server = app.listen(app.get('port'), () => {
   console.log(`Express server is listening on port ${server.address().port}`);
 });
+
+(async () => {
+  try {
+    // Test the connection to the database
+    await sequelize.authenticate();
+    console.log('Connection to the database successful!');
+  } catch(error) {
+    console.log("database not running")
+  }
+})();
 
