@@ -25,6 +25,7 @@ const app = express();
 app.use(morgan('dev'));
 
 // TODO setup your api routes here
+
 app.use(userRoutes);
 
 // setup a friendly greeting for the root route
