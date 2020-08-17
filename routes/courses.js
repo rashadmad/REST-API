@@ -23,6 +23,11 @@ router.post('/api/courses', asyncHelper.asyncHandler(async(req, res) => {
     res.status(201).end(); 
 }));
 // PUT /api/courses/:id 204 - Updates a course and returns no content
+router.put('/api/courses/:id', asyncHelper.asyncHandler(async(req, res) => {
+    const courseToUpdate = await Courses.findByPk(req.params.id);
+    courseToUpdate.update(req.body);
+    res.status(204).end(); 
+}));
 // DELETE /api/courses/:id 204 - Deletes a course and returns no content
 router.delete('/api/courses/:id', asyncHelper.asyncHandler(async(req, res) => {
     const courseToBeDeleted = await Courses.findByPk(req.params.id)
