@@ -3,7 +3,6 @@ const router = express.Router();
 const asyncHelper = require('./asyncHandler');
 
 // import models 
-const Courses = require('../models').Course;
 const Users = require('../models').Users;
 
 // Returns the currently authenticated user
@@ -18,7 +17,7 @@ router.post('/api/users', asyncHelper.asyncHandler(async(req, res) => {
     const authUser = await Users.create(req.body);
     res.location('/')
     res.send(authUser)
-    res.status(204).end();
+    res.status(201).end(); 
 }));
 
 module.exports = router;
