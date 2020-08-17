@@ -3,7 +3,7 @@ const router = express.Router();
 const asyncHelper = require('./asyncHandler');
 
 // import models 
-const Courses = require('../models').Course;
+const Courses = require('../models').Courses;
 
 // GET /api/courses 200 - Returns a list of courses (including the user that owns each course)
 // GET /api/courses/:id 200 - Returns a the course (including the user that owns the course) for the provided course ID
