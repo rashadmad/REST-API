@@ -53,7 +53,7 @@ module.exports = (sequelize) => {
   
     //Within your User model, define a HasMany association between your User and Course models (i.e. a "User" has many "Courses").
     Users.associate = (models) => {
-        Users.hasMany(models.Course);
+        Users.hasMany(models.Courses);
     };
 
   return Users;
