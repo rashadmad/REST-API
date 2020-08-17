@@ -3,14 +3,13 @@ const router = express.Router();
 const asyncHelper = require('./asyncHandler');
 
 // import models 
-const { sequelize } = require('../models');
 const Course = require('../models').Course;
 const Users = require('../models').Users;
 
 // Returns the currently authenticated user
 router.get('/api/users/:id', asyncHelper.asyncHandler(async(req, res) => {
     // TODO: await Project.findOne({ where: { authenticated: true } });
-    const authUser = await User.findByPk(req.params.id);
+    const authUser = await Users.findByPk(req.params.id);
     res.send(authUser)
 }));
 

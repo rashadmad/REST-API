@@ -45,7 +45,7 @@ module.exports = (sequelize) => {
 
       //Within your Course model, define a BelongsTo association between your Course and User models (i.e. a "Course" belongs to a single "User").
       Course.associate = (models) => {
-        Course.belongsTo(models.User);
+        Course.belongsTo(models.Users);
     };
 
   return Course;
