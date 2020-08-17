@@ -5,7 +5,7 @@ const { sequelize } = require('./models');
 
 // Get references to our models.
 const Course = require('./models').Course;
-const User = require('./models').User;
+const Users = require('./models').Users;
 
 // load modules
 const express = require('express');
