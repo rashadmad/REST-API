@@ -19,12 +19,15 @@ router.get('/api/courses/:id', asyncHelper.asyncHandler(async(req, res) => {
 }));
 // POST /api/courses 201 - Creates a course, sets the Location header to the URI for the course, and returns no content
 router.post('/api/courses', asyncHelper.asyncHandler(async(req, res) => {
-    const course = await Courses.create(req.body);
-    res.location('/')
-    res.send(course)
+    await Courses.create(req.body);
     res.status(201).end(); 
 }));
 // PUT /api/courses/:id 204 - Updates a course and returns no content
 // DELETE /api/courses/:id 204 - Deletes a course and returns no content
+router.delete('/api/courses/:id', asyncHelper.asyncHandler(async(req, res) => {
+    const courseToBeDeleted = await Courses.findByPk(req.params.id)
+    await courseToBeDeleted.destroy();
+    res.status(204).end(); 
+}));
 
 module.exports = router;
