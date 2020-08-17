@@ -5,7 +5,7 @@ const asyncHelper = require('./asyncHandler');
 // import models 
 const { sequelize } = require('../models');
 const Course = require('../models').Course;
-const User = require('../models').User;
+const Users = require('../models').Users;
 
 // Returns the currently authenticated user
 router.get('/api/users/:id', asyncHelper.asyncHandler(async(req, res) => {
@@ -15,9 +15,9 @@ router.get('/api/users/:id', asyncHelper.asyncHandler(async(req, res) => {
 }));
 
 // Creates a user, sets the Location header to "/", and returns no content
-router.post('/api/users/:id', asyncHelper.asyncHandler(async(req, res) => {
-    const authUser = await User.create(req.body);
-    res.send(authUser)
+router.post('/api/users', asyncHelper.asyncHandler(async(req, res) => {
+    const authUser = await Users.create(req.body);
+    console.log(req.body);
 }));
 
 module.exports = router;
