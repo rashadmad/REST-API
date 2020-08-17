@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 
 module.exports = (sequelize) => {
   class Courses extends Sequelize.Model {}
-  Course.init({
+  Courses.init({
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -44,9 +44,9 @@ module.exports = (sequelize) => {
   }, { sequelize });
 
       //Within your Course model, define a BelongsTo association between your Course and User models (i.e. a "Course" belongs to a single "User").
-      Course.associate = (models) => {
-        Course.belongsTo(models.Users);
+      Courses.associate = (models) => {
+        Courses.belongsTo(models.Users);
     };
 
-  return Course;
+  return Courses;
 };

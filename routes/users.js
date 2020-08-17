@@ -3,7 +3,7 @@ const router = express.Router();
 const asyncHelper = require('./asyncHandler');
 
 // import models 
-const Course = require('../models').Course;
+const Courses = require('../models').Course;
 const Users = require('../models').Users;
 
 // Returns the currently authenticated user
@@ -16,7 +16,9 @@ router.get('/api/users/:id', asyncHelper.asyncHandler(async(req, res) => {
 // Creates a user, sets the Location header to "/", and returns no content
 router.post('/api/users', asyncHelper.asyncHandler(async(req, res) => {
     const authUser = await Users.create(req.body);
-    console.log(req.body);
+    res.location('/')
+    res.send(authUser)
+    res.status(204).end();
 }));
 
 module.exports = router;
