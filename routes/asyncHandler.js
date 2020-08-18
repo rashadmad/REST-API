@@ -1,4 +1,5 @@
 const express = require('express');
+const auth = require('basic-auth');
 
 //async handler
 
@@ -13,4 +14,14 @@ const express = require('express');
     }
   }
 
-  module.exports = { asyncHandler }
+//authentication middleware
+
+  const authenticateUser = (req, res, next) => {
+    
+    next();
+  }
+
+  module.exports = { 
+    asyncHandler,
+    authenticateUser 
+  }
