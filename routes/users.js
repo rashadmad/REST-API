@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const middleware = require('./customMiddleware');
 const bcryptjs = require('bcryptjs');
+const auth = require('basic-auth');
 
 // array for authenticated users
 let authenticatedUsers = []
@@ -10,10 +11,13 @@ let authenticatedUsers = []
 const Users = require('../models').Users;
 
 // Returns the currently authenticated user
-router.get('/api/users/:id', middleware.asyncHandler(async(req, res) => {
-    // TODO: await Project.findOne({ where: { authenticated: true } });
-    const authUser = await Users.findByPk(req.params.id);
-    res.send(authUser)
+router.get('/api/users/:id', middleware.asyncHandler, middleware.authenticateUser(async(req, res) => {
+    //on a successful authentication user equals current user
+    //const user = req.currentUser;
+    res.json({
+        emailAddress: user.emailAddress,
+        pass: user.password,
+      });
 }));
 
 // Creates a user, sets the Location header to "/", and returns no content
