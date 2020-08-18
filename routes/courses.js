@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const asyncHelper = require('./asyncHandler');
+const asyncHelper = require('./customMiddleware');
 
 // import models 
 const Courses = require('../models').Courses;
