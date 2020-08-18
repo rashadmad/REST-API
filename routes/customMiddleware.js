@@ -29,40 +29,45 @@ const auth = require('basic-auth');
         a name value—the user's email address 
         a pass value—the user's password (in clear text). 
       */
-      const name = Users.find(username => username.emailAddress === credentials.emailAddress);
-      
+      const name = Users.find(
+        (username) => username.emailAddress === credentials.emailAddress
+      );
+
       //check if the credentials have both a unique email and a password
       if (name) {
-
         //compare user's password to the Authorization header
-        const authenticated = bcryptjs
-          .compareSync(credentials.pass, user.password);
-        
-         //rings true if password matches 
+        const authenticated = bcryptjs.compareSync(
+          credentials.pass,
+          user.password
+        );
+
+        //rings true if password matches
         if (authenticated) {
-          console.log(`Authentication successful for email: ${credentials.emailAddress}`);
+          console.log(
+            `Authentication successful for email: ${credentials.emailAddress}`
+          );
           req.currentUser = name;
         } else {
           message = `Authentication failure for name: ${credentials.emailAddress}`;
         }
-        } else {
-          message = `User not found for username: ${credentials.emailAddress}`;
-        }
-        } else {
-          message = 'Auth header not found';
-        }
+      } else {
+        message = `User not found for username: ${credentials.emailAddress}`;
+      }
+    } else {
+      message = "Auth header not found";
+    }
     // If user authentication failed...
     if (message) {
       console.warn(message);
 
       // Return a response with a 401 Unauthorized HTTP status code.
-      res.status(401).json({ message: 'Access Denied' });
+      res.status(401).json({ message: "Access Denied" });
     } else {
       // Or if user authentication succeeded...
       // Call the next() method.
       next();
     }
-};
+  };
 
   module.exports = { 
     asyncHandler,
