@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const asyncHelper = require('./asyncHandler');
+const bcryptjs = require('bcryptjs');
+
+// array for authenticated users
+let authenticatedUsers = []
 
 // import models 
 const Users = require('../models').Users;
@@ -17,6 +21,8 @@ router.post('/api/users', asyncHelper.asyncHandler(async(req, res) => {
     const authUser = await Users.create(req.body);
     res.location('/')
     res.send(authUser)
+    authUser.password = bcryptjs.hashSync(authUser.password);
+    authenticatedUsers.push(req.body)
     res.status(201).end(); 
 }));
 
