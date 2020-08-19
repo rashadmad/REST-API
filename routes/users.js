@@ -5,17 +5,18 @@ const bcryptjs = require('bcryptjs');
 const auth = require('basic-auth');
 
 // array for authenticated users
-let authenticatedUsers = []
+let listOfUsers = []
 
 // import models 
 const Users = require('../models').Users;
 
+//I need to create a global variable of all users in the database and update it every time the file runs
 (async () => {
     try {
         const allUsers = await Users.findAll()
-        authenticatedUsers.push(allUsers)
+        listOfUsers.push(allUsers)
     } catch {
-        console.log("There are no users created")
+        console.log("There are no users created yet.")
     }
 })();
 

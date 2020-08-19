@@ -29,7 +29,7 @@ const auth = require('basic-auth');
         a name value—the user's email address 
         a pass value—the user's password (in clear text). 
       */
-      const user = credentials.users.find(u => u.emailAddress === credentials.emailAddress);
+      const user = listOfUsers.find(u => u.emailAddress === credentials.emailAddress);
 
       //check if the credentials have both a unique email and a password
       if (authenticatedUser) {
