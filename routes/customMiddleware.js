@@ -1,6 +1,18 @@
 const express = require('express');
 ///You can use the basic-auth npm package to parse the Authorization header into the user's credentials.
 const auth = require('basic-auth');
+const bcryptjs = require('bcryptjs');
+
+let listOfUsers = [];
+//I need to create a global variable of all users in the database and update it every time the file runs
+(async () => {
+    try {
+        const allUsers = await Users.findAll()
+        listOfUsers.push(allUsers)
+    } catch {
+        console.log("There are no users created yet.")
+    }
+})();
 
 //async handler
 
@@ -32,7 +44,7 @@ const auth = require('basic-auth');
       const user = listOfUsers.find(u => u.emailAddress === credentials.emailAddress);
 
       //check if the credentials have both a unique email and a password
-      if (authenticatedUser) {
+      if (user) {
         //compare user's password to the Authorization header
         const authenticated = bcryptjs.compareSync(
           credentials.pass,
@@ -44,7 +56,7 @@ const auth = require('basic-auth');
           console.log(
             `Authentication successful for email: ${credentials.emailAddress}`
           );
-          req.currentUser = authenticatedUser;
+          req.currentUser = user;
         } else {
           message = `Authentication failure for name: ${credentials.emailAddress}`;
         }

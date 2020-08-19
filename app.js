@@ -25,17 +25,6 @@ app.use(express.json());
 // setup morgan which gives us http request logging
 app.use(morgan('dev'));
 
-let listOfUsers = [];
-//I need to create a global variable of all users in the database and update it every time the file runs
-(async () => {
-    try {
-        const allUsers = await Users.findAll()
-        listOfUsers.push(allUsers)
-    } catch {
-        console.log("There are no users created yet.")
-    }
-})();
-
 app.use(userRoutes);
 app.use(courseRoutes);
 
