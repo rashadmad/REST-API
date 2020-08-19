@@ -11,13 +11,16 @@ let authenticatedUsers = []
 const Users = require('../models').Users;
 
 // Returns the currently authenticated user
-router.get('/api/users/:id', middleware.asyncHandler, middleware.authenticateUser(async(req, res) => {
+router.get('/api/users/:id', middleware.authenticateUser, middleware.asyncHandler(async(req, res) => {
     //on a successful authentication user equals current user
-    //const user = req.currentUser;
+    const users = Users.findAll()
+    const user = req.currentUser;
     res.json({
+        users: users,
         emailAddress: user.emailAddress,
         pass: user.password,
       });
+    res.send
 }));
 
 // Creates a user, sets the Location header to "/", and returns no content

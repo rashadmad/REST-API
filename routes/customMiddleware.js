@@ -29,12 +29,10 @@ const auth = require('basic-auth');
         a name value—the user's email address 
         a pass value—the user's password (in clear text). 
       */
-      const name = Users.find(
-        (username) => username.emailAddress === credentials.emailAddress
-      );
+      const user = credentials.users.find(u => u.emailAddress === credentials.emailAddress);
 
       //check if the credentials have both a unique email and a password
-      if (name) {
+      if (authenticatedUser) {
         //compare user's password to the Authorization header
         const authenticated = bcryptjs.compareSync(
           credentials.pass,
@@ -46,7 +44,7 @@ const auth = require('basic-auth');
           console.log(
             `Authentication successful for email: ${credentials.emailAddress}`
           );
-          req.currentUser = name;
+          req.currentUser = authenticatedUser;
         } else {
           message = `Authentication failure for name: ${credentials.emailAddress}`;
         }
