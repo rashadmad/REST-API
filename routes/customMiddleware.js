@@ -3,6 +3,8 @@ const express = require('express');
 const auth = require('basic-auth');
 const bcryptjs = require('bcryptjs');
 
+const Users = require('../models').Users;
+
 let listOfUsers = [];
 //I need to create a global variable of all users in the database and update it every time the file runs
 (async () => {
@@ -30,7 +32,7 @@ let listOfUsers = [];
 //authentication middleware
   ///Add a middleware function that attempts to get the user credentials from the Authorization header set on the request.
   
-  const authenticateUser = (req, res, next) => {
+  const authenticateUser = async (req, res, next) => {
     // Parse the user's credentials from the Authorization header.
     const credentials = auth(req);
 
@@ -41,16 +43,16 @@ let listOfUsers = [];
         a name value—the user's email address 
         a pass value—the user's password (in clear text). 
       */
-      const user = listOfUsers.find(u => u.emailAddress === credentials.emailAddress);
 
+      const users = await Users.findAll();
+      const user = users.find(u => u.emailAddress === credentials.name); 
       //check if the credentials have both a unique email and a password
       if (user) {
+        console.log(credentials.pass)
+        console.log(user.password)
         //compare user's password to the Authorization header
-        const authenticated = bcryptjs.compareSync(
-          credentials.pass,
-          user.password
-        );
-
+        const authenticated = bcryptjs
+          .compareSync(credentials.pass, user.password);
         //rings true if password matches
         if (authenticated) {
           console.log(
@@ -61,7 +63,7 @@ let listOfUsers = [];
           message = `Authentication failure for name: ${credentials.emailAddress}`;
         }
       } else {
-        message = `User not found for username: ${credentials.emailAddress}`;
+        message = `emailAddress not found for: ${credentials.emailAddress}`;
       }
     } else {
       message = "Auth header not found";
