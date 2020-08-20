@@ -18,7 +18,6 @@ router.get('/api/users/', middleware.authenticateUser, middleware.asyncHandler(a
         lastName: user.lastName,
         emailAddress: user.emailAddress
       });
-    res.send(user)
 }));
 
 // Creates a user, sets the Location header to "/", and returns no content
