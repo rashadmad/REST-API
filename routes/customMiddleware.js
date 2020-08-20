@@ -5,17 +5,6 @@ const bcryptjs = require('bcryptjs');
 
 const Users = require('../models').Users;
 
-let listOfUsers = [];
-//I need to create a global variable of all users in the database and update it every time the file runs
-(async () => {
-    try {
-        const allUsers = await Users.findAll()
-        listOfUsers.push(allUsers)
-    } catch {
-        console.log("There are no users created yet.")
-    }
-})();
-
 //async handler
 
   const asyncHandler = (functionToCallBack) => {
@@ -35,6 +24,7 @@ let listOfUsers = [];
   const authenticateUser = async (req, res, next) => {
     // Parse the user's credentials from the Authorization header.
     const credentials = auth(req);
+    let message = ''
 
     // Check if the credentials where parsed
 
@@ -56,14 +46,14 @@ let listOfUsers = [];
         //rings true if password matches
         if (authenticated) {
           console.log(
-            `Authentication successful for email: ${credentials.emailAddress}`
+            `Authentication successful for email: ${credentials.name}`
           );
           req.currentUser = user;
         } else {
-          message = `Authentication failure for name: ${credentials.emailAddress}`;
+          message = `Authentication failure for name: ${credentials.name}`;
         }
       } else {
-        message = `emailAddress not found for: ${credentials.emailAddress}`;
+        message = `emailAddress not found for: ${credentials.name}`;
       }
     } else {
       message = "Auth header not found";

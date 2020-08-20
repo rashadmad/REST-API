@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const middleware = require('./customMiddleware');
 const auth = require('basic-auth');
+const bcryptjs = require('bcryptjs');
 
 // import models 
 const Users = require('../models').Users;
@@ -22,9 +23,7 @@ router.get('/api/users/', middleware.authenticateUser, middleware.asyncHandler(a
 router.post('/api/users', middleware.asyncHandler(async(req, res) => {
     const authUser = await Users.create(req.body);
     res.location('/')
-    res.send(authUser)
     authUser.password = bcryptjs.hashSync(authUser.password);
-    authenticatedUsers.push(req.body)
     res.status(201).end(); 
 }));
 
