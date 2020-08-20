@@ -21,9 +21,10 @@ router.get('/api/users/', middleware.authenticateUser, middleware.asyncHandler(a
 
 // Creates a user, sets the Location header to "/", and returns no content
 router.post('/api/users', middleware.asyncHandler(async(req, res) => {
-    const authUser = await Users.create(req.body);
+    const newUser = req.body;
+    newUser.password = bcryptjs.hashSync(newUser.password);
+    const hashedUser = await Users.create(newUser);
     res.location('/')
-    authUser.password = bcryptjs.hashSync(authUser.password);
     res.status(201).end(); 
 }));
 
