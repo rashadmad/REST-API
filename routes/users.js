@@ -13,8 +13,10 @@ router.get('/api/users/', middleware.authenticateUser, middleware.asyncHandler(a
     //on a successful authentication user equals current user
     const user = req.currentUser;
     res.json({
-        name: user.email,
-        pass: user.password,
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        emailAddress: user.emailAddress
       });
     res.send(user)
 }));
