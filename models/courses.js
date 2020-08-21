@@ -34,7 +34,7 @@ module.exports = (sequelize) => {
          },
     },
     estimatedTime: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING, 
         allowNull: true,
     },
     materialsNeeded: {
@@ -45,7 +45,12 @@ module.exports = (sequelize) => {
 
       //Within your Course model, define a BelongsTo association between your Course and User models (i.e. a "Course" belongs to a single "User").
       Courses.associate = (models) => {
-        Courses.belongsTo(models.Users);
+        Courses.belongsTo(models.Users, {
+            foreignKey: {
+                fieldName: 'userId',
+                allowNull: true,
+            },
+        });
     };
 
   return Courses;

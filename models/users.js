@@ -1,5 +1,5 @@
 'use strict';
-const Sequelize = require('sequelize');
+const Sequelize = require('sequelize'); 
 
 module.exports = (sequelize) => {
   class Users extends Sequelize.Model {}
@@ -53,7 +53,12 @@ module.exports = (sequelize) => {
   
     //Within your User model, define a HasMany association between your User and Course models (i.e. a "User" has many "Courses").
     Users.associate = (models) => {
-        Users.hasMany(models.Courses);
+        Users.hasMany(models.Courses, {
+            foreignKey: {
+                fieldName: 'userId',
+                allowNull: true,
+            },
+        });
     };
 
   return Users;
