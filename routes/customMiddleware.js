@@ -37,7 +37,7 @@ const Users = require('../models').Users;
       const users = await Users.findAll();
       const user = users.find(u => u.emailAddress === credentials.name); 
       //check if the credentials have both a unique email and a password
-      if (user) {``
+      if (user) {
         //compare user's password to the Authorization header
         const authenticated = bcryptjs
           .compareSync(credentials.pass, user.password);

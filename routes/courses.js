@@ -18,18 +18,18 @@ router.get('/api/courses/:id', middleware.asyncHandler(async(req, res) => {
     res.status(200).end(); 
 }));
 // POST /api/courses 201 - Creates a course, sets the Location header to the URI for the course, and returns no content
-router.post('/api/courses', middleware.asyncHandler(async(req, res) => {
+router.post('/api/courses',middleware.authenticateUser, middleware.asyncHandler(async(req, res) => {
     await Courses.create(req.body);
     res.status(201).end(); 
 }));
 // PUT /api/courses/:id 204 - Updates a course and returns no content
-router.put('/api/courses/:id', middleware.asyncHandler(async(req, res) => {
+router.put('/api/courses/:id',middleware.authenticateUser, middleware.asyncHandler(async(req, res) => {
     const courseToUpdate = await Courses.findByPk(req.params.id);
     courseToUpdate.update(req.body);
     res.status(204).end(); 
 }));
 // DELETE /api/courses/:id 204 - Deletes a course and returns no content
-router.delete('/api/courses/:id', middleware.asyncHandler(async(req, res) => {
+router.delete('/api/courses/:id',middleware.authenticateUser, middleware.asyncHandler(async(req, res) => {
     const courseToBeDeleted = await Courses.findByPk(req.params.id)
     await courseToBeDeleted.destroy();
     res.status(204).end(); 

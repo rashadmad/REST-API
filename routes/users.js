@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const middleware = require('./customMiddleware');
 const auth = require('basic-auth');
-const bcryptjs = require('bcryptjs');
+const bcryptjs = require('bcryptjs'); 
 
 // import models 
 const Users = require('../models').Users;
