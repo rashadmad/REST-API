@@ -19,8 +19,8 @@ router.get('/api/courses/:id', middleware.asyncHandler(async(req, res) => {
 }));
 // POST /api/courses 201 - Creates a course, sets the Location header to the URI for the course, and returns no content
 router.post('/api/courses',middleware.authenticateUser, middleware.asyncHandler(async(req, res) => {
-    await Courses.create(req.body);
-    res.location(req.url);  
+    const newCourse = await Courses.create(req.body);
+    res.location(req.url + "/" + newCourse.id); 
     res.status(201).end(); 
 }));
 // PUT /api/courses/:id 204 - Updates a course and returns no content
